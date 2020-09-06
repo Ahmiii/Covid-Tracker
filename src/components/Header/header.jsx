@@ -14,6 +14,7 @@ const Header = (props) => {
   const { classes } = props;
 
   const [countries, setCountries] = useState([]);
+  const [selectCountry, setselectCountry] = useState("WorldWide");
 
   useEffect(() => {
     fetch("https://disease.sh/v3/covid-19/countries")
@@ -35,11 +36,20 @@ const Header = (props) => {
       });
   }, []);
 
+  const onCountryChange = (e) => {
+    setselectCountry(e.target.value);
+  };
+
   return (
     <div className={classes.Header}>
       <h1>Covid19-Tracker React App</h1>
       <FormControl>
-        <Select>
+        <Select
+          variant="outlined"
+          onChange={onCountryChange}
+          value={selectCountry}
+        >
+          <MenuItem value="WorldWide">WorldWide</MenuItem>
           {countries.map((country) => {
             return (
               <MenuItem key={country.id} value={country.value}>

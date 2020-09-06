@@ -1,25 +1,38 @@
 import React from "react";
 import "./App.css";
 import Header from "./components/Header/header";
+import InforBox from "./components/InfoBox/InfoBox";
+import Map from "./components/Map/Map";
+import { withStyles } from "@material-ui/core/styles";
 
-function App() {
+const styles = (theme) => ({
+  rootInfoBox: {
+    display: "flex",
+    justifyContent: "space-between",
+  },
+});
+
+const App = (props) => {
+  const { classes } = props;
   return (
     <div className="app">
-      <Header />
-      {/* Header */}
-      {/* Title + Select input DropDown */}
+      <div className={classes.appleftSide}>
+        <Header />
+        <div className={classes.rootInfoBox}>
+          <InforBox title="CoronaCases" cases={123} total={5000} />
+          <InforBox title="CoronaCases" cases={123} total={5000} />
+          <InforBox title="CoronaCases" cases={123} total={5000} />
+        </div>
+        <Map />
+      </div>
 
-      {/* Info Boxex */}
-      {/* Info Boxex */}
-      {/* Info Boxex */}
+      <div className={classes.apprightSide}></div>
 
       {/* Table */}
 
       {/* Graph */}
-
-      {/* Map */}
     </div>
   );
-}
+};
 
-export default App;
+export default withStyles(styles)(App);
