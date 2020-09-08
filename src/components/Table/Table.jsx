@@ -15,7 +15,7 @@ const styles = () => ({
 });
 
 const Table = (props) => {
-  const { countriesData, classes } = props;
+  const { countriesData } = props;
   return (
     <div className="table">
       {countriesData.map(({ country, cases }) => {

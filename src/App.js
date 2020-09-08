@@ -8,6 +8,7 @@ import { Card, CardContent } from "@material-ui/core";
 import Table from "./components/Table/Table";
 import { sortData } from "./utils";
 import LineChart from "./components/LineChart/lineChart";
+import "leaflet/dist/leaflet.css";
 
 const styles = (theme) => ({
   rootInfoBox: {
@@ -26,6 +27,9 @@ const App = (props) => {
   const [selectCountry, setselectCountry] = useState("WorldWide");
   const [CountryInfo, setCountryInfo] = useState({});
   const [tableData, settableData] = useState([]);
+  const [mapCenter, setmapCenter] = useState({ lat: 34.80746, lng: -40.4796 });
+  const [mapZoom, setmapZoom] = useState(3);
+  const [mapCountries, setmapCountries] = useState([]);
 
   const filterCountry = useCallback((country) => {
     setselectCountry(country);
@@ -40,7 +44,7 @@ const App = (props) => {
         const countriesData = [];
 
         responceData.map((country) => {
-          countriesData.push({
+          return countriesData.push({
             id: country.countryInfo._id,
             name: country.country,
             value: country.countryInfo.iso2,
@@ -49,6 +53,7 @@ const App = (props) => {
         const sortedCountryData = sortData(responceData);
         setcountriesList(countriesData);
         settableData(sortedCountryData);
+        setmapCountries(responceData);
       });
   }, []);
 
@@ -64,15 +69,23 @@ const App = (props) => {
       })
       .then((responceData) => {
         setCountryInfo(responceData);
+        console.log({ responceData });
+        setmapCenter([
+          responceData.countryInfo.lat,
+          responceData.countryInfo.long,
+        ]);
+        setmapZoom(4);
       });
   }, [selectCountry]);
+  console.log({ mapCenter });
+
   return (
     <div className="app">
       <div className={classes.appleftSide}>
         <Header countries={countiesList} countryName={filterCountry} />
         <InforBox countryData={CountryInfo} />
 
-        <Map />
+        <Map countries={mapCountries} center={mapCenter} zoom={mapZoom} />
       </div>
 
       <div className={classes.apprightSide}></div>

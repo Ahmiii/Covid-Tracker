@@ -21,7 +21,6 @@ const Header = (props) => {
   }, [countryName, selectedCountry]);
 
   const onCountryChange = (e) => {
-    e.preventDefault();
     setselectedCountry(e.target.value);
   };
 
