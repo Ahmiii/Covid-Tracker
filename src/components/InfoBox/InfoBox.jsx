@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import BoxContent from "./BoxContent/BoxContent";
 
 import { withStyles } from "@material-ui/core/styles";
@@ -7,6 +7,7 @@ const styles = (theme) => ({
   rootInfoBox: {
     display: "flex",
     justifyContent: "space-between",
+    borderRadius: "15px",
   },
 });
 

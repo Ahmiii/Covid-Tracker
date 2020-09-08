@@ -18,7 +18,7 @@ const Header = (props) => {
 
   useEffect(() => {
     countryName(selectedCountry);
-  }, [selectedCountry]);
+  }, [countryName, selectedCountry]);
 
   const onCountryChange = (e) => {
     e.preventDefault();

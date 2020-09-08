@@ -10,7 +10,7 @@ const BoxContent = (props) => {
   const { title, cases, total, classes } = props;
   return (
     <div className={classes.root}>
-      <Card>
+      <Card style={{ borderRadius: "15px", boxShadow: " 5px 10px #888888" }}>
         <CardContent>
           <Typography color="textSecondary">{title}</Typography>
           <h2>{cases}</h2>

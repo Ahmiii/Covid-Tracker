@@ -5,6 +5,9 @@ import InforBox from "./components/InfoBox/InfoBox";
 import Map from "./components/Map/Map";
 import { withStyles } from "@material-ui/core/styles";
 import { Card, CardContent } from "@material-ui/core";
+import Table from "./components/Table/Table";
+import { sortData } from "./utils";
+import LineChart from "./components/LineChart/lineChart";
 
 const styles = (theme) => ({
   rootInfoBox: {
@@ -13,13 +16,12 @@ const styles = (theme) => ({
   },
   appleftSide: {
     flex: 0.9,
+    borderRadius: "25px",
   },
 });
 
 const App = (props) => {
-  console.log("app.js");
   const { classes } = props;
-
   const [countiesList, setcountriesList] = useState([]);
   const [selectCountry, setselectCountry] = useState("WorldWide");
   const [CountryInfo, setCountryInfo] = useState({});
@@ -27,7 +29,7 @@ const App = (props) => {
 
   const filterCountry = useCallback((country) => {
     setselectCountry(country);
-  });
+  }, []);
 
   useEffect(() => {
     fetch("https://disease.sh/v3/covid-19/countries")
@@ -36,7 +38,7 @@ const App = (props) => {
       })
       .then((responceData) => {
         const countriesData = [];
-        console.log({ responceData });
+
         responceData.map((country) => {
           countriesData.push({
             id: country.countryInfo._id,
@@ -44,11 +46,12 @@ const App = (props) => {
             value: country.countryInfo.iso2,
           });
         });
+        const sortedCountryData = sortData(responceData);
         setcountriesList(countriesData);
-        settableData(responceData);
-        console.log("runs");
+        settableData(sortedCountryData);
       });
   }, []);
+
   useEffect(() => {
     console.log({ selectCountry });
     const url =
@@ -61,7 +64,6 @@ const App = (props) => {
       })
       .then((responceData) => {
         setCountryInfo(responceData);
-        console.log(CountryInfo);
       });
   }, [selectCountry]);
   return (
@@ -77,11 +79,11 @@ const App = (props) => {
       <Card>
         <CardContent>
           <h3>Live cases by country</h3>
-          <Table countries={tableData} />
+          <Table countriesData={tableData} />
           <h3>World Wide cases</h3>
+          <LineChart />
         </CardContent>
       </Card>
-      {/* Table */}
 
       {/* Graph */}
     </div>
