@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { MenuItem, FormControl, Select } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
 
@@ -11,33 +11,18 @@ const styles = (theme) => ({
 });
 
 const Header = (props) => {
-  const { classes } = props;
-
-  const [countries, setCountries] = useState([]);
-  const [selectCountry, setselectCountry] = useState("WorldWide");
+  console.log("render header.js");
+  const { classes, countries, countryName } = props;
+  const [selectedCountry, setselectedCountry] = useState("WorldWide");
+  const refVal = useRef();
 
   useEffect(() => {
-    fetch("https://disease.sh/v3/covid-19/countries")
-      .then((responce) => {
-        return responce.json();
-      })
-      .then((responceData) => {
-        const countriesData = [];
-
-        responceData.map((country) => {
-          countriesData.push({
-            id: country.countryInfo._id,
-            name: country.country,
-            value: country.countryInfo.iso2,
-          });
-        });
-
-        setCountries(countriesData);
-      });
-  }, []);
+    countryName(selectedCountry);
+  }, [selectedCountry]);
 
   const onCountryChange = (e) => {
-    setselectCountry(e.target.value);
+    e.preventDefault();
+    setselectedCountry(e.target.value);
   };
 
   return (
@@ -47,7 +32,8 @@ const Header = (props) => {
         <Select
           variant="outlined"
           onChange={onCountryChange}
-          value={selectCountry}
+          value={selectedCountry}
+          ref={refVal}
         >
           <MenuItem value="WorldWide">WorldWide</MenuItem>
           {countries.map((country) => {

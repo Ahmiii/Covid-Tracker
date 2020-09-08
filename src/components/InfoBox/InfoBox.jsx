@@ -1,22 +1,34 @@
-import React from "react";
-import { Card, CardContent, Typography } from "@material-ui/core";
+import React, { useState, useEffect } from "react";
+import BoxContent from "./BoxContent/BoxContent";
+
 import { withStyles } from "@material-ui/core/styles";
 
 const styles = (theme) => ({
-  root: {},
+  rootInfoBox: {
+    display: "flex",
+    justifyContent: "space-between",
+  },
 });
 
 const InfoBox = (props) => {
-  const { title, cases, total, classes } = props;
+  const { classes, countryData } = props;
   return (
-    <div className={classes.root}>
-      <Card>
-        <CardContent>
-          <Typography color="textSecondary">{title}</Typography>
-          <h2>{cases}</h2>
-          <Typography color="textSecondary">{total} total</Typography>
-        </CardContent>
-      </Card>
+    <div className={classes.rootInfoBox}>
+      <BoxContent
+        title="Coronavirus Cases"
+        cases={countryData.todayCases}
+        total={countryData.cases}
+      />
+      <BoxContent
+        title="Recovered"
+        cases={countryData.todayRecovered}
+        total={countryData.recovered}
+      />
+      <BoxContent
+        title="Deaths"
+        cases={countryData.todayDeaths}
+        total={countryData.deaths}
+      />
     </div>
   );
 };
