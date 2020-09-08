@@ -7,6 +7,7 @@ const styles = (theme) => ({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
+    marginBottom: "20px",
   },
 });
 

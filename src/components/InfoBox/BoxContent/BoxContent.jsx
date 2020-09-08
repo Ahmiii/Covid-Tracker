@@ -1,27 +1,22 @@
 import React from "react";
 import { Card, CardContent, Typography } from "@material-ui/core";
-import { withStyles } from "@material-ui/core/styles";
-
-const styles = (theme) => ({
-  root: {
-    borderRadius: "15px",
-    boxShadow: "0px 5px 20px rgb(71, 71,71)",
-  },
-});
+import "./BoxContent.css";
 
 const BoxContent = (props) => {
-  const { title, cases, total, classes } = props;
+  const { title, cases, total } = props;
   return (
-    <div>
-      <Card className={classes.root}>
-        <CardContent>
-          <Typography color="textSecondary">{title}</Typography>
-          <h2>{cases}</h2>
-          <Typography color="textSecondary">{total} total</Typography>
-        </CardContent>
-      </Card>
-    </div>
+    <Card className="infoBox">
+      <CardContent>
+        <Typography className="infoBox__title" color="textSecondary">
+          {title}
+        </Typography>
+        <h2 className="infoBox__cases">{cases}</h2>
+        <Typography className="infoBox__total" color="textSecondary">
+          {total} total
+        </Typography>
+      </CardContent>
+    </Card>
   );
 };
 
-export default withStyles(styles)(BoxContent);
+export default BoxContent;

@@ -1,7 +1,7 @@
 import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import "./Table.css";
-
+import numeral from "numeral";
 const styles = () => ({
   rootTabe: {
     marginTop: "20px",
@@ -23,7 +23,7 @@ const Table = (props) => {
           <tr>
             <td>{country}</td>
             <td>
-              <strong>{cases}</strong>
+              <strong>{numeral(cases).format("0,0")}</strong>
             </td>
           </tr>
         );

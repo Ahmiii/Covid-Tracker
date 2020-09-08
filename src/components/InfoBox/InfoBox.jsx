@@ -1,6 +1,6 @@
 import React from "react";
 import BoxContent from "./BoxContent/BoxContent";
-
+import { printStats } from "../../utils";
 import { withStyles } from "@material-ui/core/styles";
 
 const styles = (theme) => ({
@@ -17,18 +17,18 @@ const InfoBox = (props) => {
     <div className={classes.rootInfoBox}>
       <BoxContent
         title="Coronavirus Cases"
-        cases={countryData.todayCases}
-        total={countryData.cases}
+        cases={printStats(countryData.todayCases)}
+        total={printStats(countryData.cases)}
       />
       <BoxContent
         title="Recovered"
-        cases={countryData.todayRecovered}
-        total={countryData.recovered}
+        cases={printStats(countryData.todayRecovered)}
+        total={printStats(countryData.recovered)}
       />
       <BoxContent
         title="Deaths"
-        cases={countryData.todayDeaths}
-        total={countryData.deaths}
+        cases={printStats(countryData.todayDeaths)}
+        total={printStats(countryData.deaths)}
       />
     </div>
   );
