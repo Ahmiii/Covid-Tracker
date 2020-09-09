@@ -83,10 +83,12 @@ const App = (props) => {
       .then((responceData) => {
         setCountryInfo(responceData);
         console.log({ responceData });
-        setmapCenter([
-          responceData.countryInfo.lat,
-          responceData.countryInfo.long,
-        ]);
+        selectCountry === "WorldWide"
+          ? setmapCenter([34.80746, -40.4796])
+          : setmapCenter([
+              responceData.countryInfo.lat,
+              responceData.countryInfo.long,
+            ]);
         setmapZoom(4);
       });
   }, [selectCountry]);

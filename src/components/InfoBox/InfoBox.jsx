@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import BoxContent from "./BoxContent/BoxContent";
 import { printStats } from "../../utils";
 import { withStyles } from "@material-ui/core/styles";
