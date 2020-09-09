@@ -9,6 +9,9 @@ const styles = (theme) => ({
     alignItems: "center",
     marginBottom: "20px",
   },
+  dropDown: {
+    backgroundColor: "white",
+  },
 });
 
 const Header = (props) => {
@@ -30,6 +33,7 @@ const Header = (props) => {
       <h1>Covid19-Tracker React App</h1>
       <FormControl>
         <Select
+          className={classes.dropDown}
           variant="outlined"
           onChange={onCountryChange}
           value={selectedCountry}

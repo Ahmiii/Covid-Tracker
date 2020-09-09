@@ -19,6 +19,14 @@ const styles = (theme) => ({
     flex: 0.9,
     borderRadius: "25px",
   },
+  apprightSide: {
+    display: "flex",
+    flexDirection: "column",
+  },
+  graphTile: {
+    marginTop: "20px",
+    marginBottom: "20px",
+  },
 });
 
 const App = (props) => {
@@ -30,9 +38,14 @@ const App = (props) => {
   const [mapCenter, setmapCenter] = useState({ lat: 34.80746, lng: -40.4796 });
   const [mapZoom, setmapZoom] = useState(3);
   const [mapCountries, setmapCountries] = useState([]);
+  const [casesType, setcasesType] = useState("cases");
 
   const filterCountry = useCallback((country) => {
     setselectCountry(country);
+  }, []);
+
+  const filterCaseType = useCallback((cases) => {
+    setcasesType(cases);
   }, []);
 
   useEffect(() => {
@@ -83,22 +96,32 @@ const App = (props) => {
     <div className="app">
       <div className={classes.appleftSide}>
         <Header countries={countiesList} countryName={filterCountry} />
-        <InforBox countryData={CountryInfo} />
+        <InforBox
+          countryData={CountryInfo}
+          clickCategory={filterCaseType}
+          active={casesType}
+        />
 
-        <Map countries={mapCountries} center={mapCenter} zoom={mapZoom} />
+        <Map
+          countries={mapCountries}
+          center={mapCenter}
+          zoom={mapZoom}
+          caseType={casesType}
+        />
       </div>
 
-      <div className={classes.apprightSide}></div>
-      <Card>
-        <CardContent>
-          <h3>Live cases by country</h3>
-          <Table countriesData={tableData} />
-          <h3>World Wide cases</h3>
-          <LineChart />
-        </CardContent>
-      </Card>
+      <div>
+        <Card className={classes.apprightSide}>
+          <CardContent>
+            <h3>Live cases by country</h3>
+            <Table countriesData={tableData} />
+            <h3 className={classes.graphTile}>World Wide cases</h3>
+            <LineChart className="app__graph" caseType={casesType} />
+          </CardContent>
+        </Card>
 
-      {/* Graph */}
+        {/* Graph */}
+      </div>
     </div>
   );
 };
