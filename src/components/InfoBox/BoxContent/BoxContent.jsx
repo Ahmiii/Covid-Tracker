@@ -3,15 +3,7 @@ import { Card, CardContent, Typography } from "@material-ui/core";
 import "./BoxContent.css";
 
 const BoxContent = (props) => {
-  const {
-    title,
-    cases,
-    total,
-    onClick,
-    active,
-    red,
-    onClickChangeColor,
-  } = props;
+  const { title, cases, total, onClick, active, red } = props;
   console.log({ active });
 
   return (
