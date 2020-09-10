@@ -84,7 +84,7 @@ const App = (props) => {
         setCountryInfo(responceData);
         console.log({ responceData });
         selectCountry === "WorldWide"
-          ? setmapCenter([34.80746, -40.4796])
+          ? setmapCenter([10.0902, 11.7129])
           : setmapCenter([
               responceData.countryInfo.lat,
               responceData.countryInfo.long,
